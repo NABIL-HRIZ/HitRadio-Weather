@@ -23,6 +23,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js"
+    ></script>
+
     <script src="script.css"></script>
   </head>
   <body>
@@ -89,21 +94,28 @@
         <div class="hero-description">
           <h1>Hit Radio</h1>
           <h2>+ Météo</h2>
-          <p>
-            Votre station radio préférée s'enrichit Découvrez maintenant la
-            météo en temps réel, les prévisions détaillées et bien plus encore,
-            tout en écoutant vos hits favoris.
-          </p>
+          <p> Votre station radio préférée s'enrichit
+ Découvrez maintenant la météo en 
+ temps réel, les prévisions détaillées
+ et bien plus encore, tout en écoutant 
+ vos hits favoris.</p>
           <div class="hero-btn">
             <button class="btn" style="background-color: yellow !important">
               <i class="fa-regular fa-cloud"></i> Voir la Meteo
             </button>
-            <button class="btn-2" style="border: 3px solid #ffff; color: #fff">
+            <button class="btn" style="border: 3px solid #ffff; color: #fff">
               <i class="fa-solid fa-music"></i> Ecouter En Direct
             </button>
           </div>
         </div>
-        <div class="local-météo">
+
+        <div class="hero-side-right">
+          <div class="spline-container">
+            <spline-viewer
+              url="https://prod.spline.design/YZIUL14SHtEFaVHV/scene.splinecode"
+            ></spline-viewer>
+          </div>
+         <div class="local-météo">
           <div class="local-météo-city">
             <div class="local-météo-city-infos">
               <h3><i class="fa-solid fa-location-dot"></i> Casablanca</h3>
@@ -131,6 +143,8 @@
               </h4>
             </div>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </section>
