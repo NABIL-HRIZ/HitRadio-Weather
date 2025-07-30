@@ -32,7 +32,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-lg position-fixed top-0 w-100 bg-white shadow">
         <div class="container-fluid">
           <a class="navbar-brand" href="#acceil">
             <img
@@ -101,10 +101,10 @@
  vos hits favoris.</p>
           <div class="hero-btn">
             <button class="btn" style="background-color: yellow !important">
-              <i class="fa-regular fa-cloud"></i> Voir la Meteo
+              <i class="fa-regular fa-cloud"></i> <a href="#" style="text-decoration: none;color: #000;">Voir la Meteo</a>
             </button>
             <button class="btn" style="border: 3px solid #ffff; color: #fff">
-              <i class="fa-solid fa-music"></i> Ecouter En Direct
+              <i class="fa-solid fa-music"></i> <a href="#" style="text-decoration: none;color: #fff;">Ecouter En Direct</a> 
             </button>
           </div>
         </div>
@@ -328,8 +328,7 @@
         <h1>Téléchargez Notre Application</h1>
         <p>
           Emportez HitRadio et la météo partout avec vous ! Notre application
-          mobile vous offre une expérience complète avec la radio en direct, les
-          prévisions météo détaillées et bien plus encore.
+          mobile vous offre une expérience complète 
         </p>
 
         <div class="app-info">
@@ -368,7 +367,8 @@
     </section>
 
     <footer>
-       <ul class="wrapper">
+      <div class="icons">
+    <ul class="wrapper">
     <li class="icon facebook">
       <span><i class="fab fa-facebook-f"></i></span>
     </li>
@@ -382,6 +382,19 @@
       <span><i class="fab fa-instagram"></i></span>
     </li>
   </ul>
+  <div class="links">
+    <ul class="links">
+      <li><a href="">Acceil</a></li>
+      <li><a href="">Méteo</a></li>
+      <li><a href="">Prévisions Horaires</a></li>
+      <li><a href="">Prévisions 5 jours</a></li>
+      <li><a href="">Télécharger App</a></li>
+
+
+    </ul>
+    </div>
+      </div>
+   
     </footer>
   </body>
 </html>
