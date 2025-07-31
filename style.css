@@ -24,7 +24,8 @@
 .hero-section {
   width: 100%;
   min-height: 100vh;
-  background:#BF3131;
+  /* background:#BF3131; */
+  background-color: #000;
   padding-top:50px;
   padding-right:40px;
   padding-left: 40px;
@@ -52,12 +53,13 @@
   font-size: 80px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: red;
 }
 
 .hero-description h2 {
   font-size: 60px;
   font-weight: 700;
-  color: yellow;
+  color: rgb(222, 222, 142);
   margin-bottom: 20px;
 }
 
@@ -170,11 +172,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color:rgba(252, 243, 243, 0.5);
+  border-radius: 30px;
 }
 .search-cart-input{
   padding:50px;
 }
-.search-cart-input form {
+.search-cart-input .search {
   display: flex;
   align-items: center;
   background-color: white;
@@ -187,7 +191,7 @@
   
 }
 
-.search-cart-input form input {
+.search-cart-input .search input {
   border: none;
   outline: none;
   padding: 10px 15px;
@@ -196,7 +200,7 @@
   width: 200px;
 }
 
-.search-cart-input form button {
+.search-cart-input .search button {
   background-color: red;
   color: white;
   border: none;
@@ -212,7 +216,7 @@
   transition: background-color 0.3s;
 }
 
-.search-cart-input form button:hover {
+.search-cart-input .search button:hover {
   background-color: darkred;
 }
 .cart-search-infos {
@@ -469,9 +473,11 @@ margin-bottom: 10px;
 }
 
 /* From Uiverse.io by vinodjangid07 */ 
-.prevesions-horaire{
+.prevesion-horaire{
   padding: 40px;
+  
 }
+
 .prevesion-horaire>h1{
   font-size:60px;
   font-weight: bold;
@@ -487,6 +493,9 @@ margin-bottom: 10px;
   grid-template-columns: repeat(5,1fr);
   align-items: center;
   gap:10px;
+  background-color:rgba(252, 243, 243, 0.5);
+  border-radius: 30px;
+
 }
 .cardContainer {
   width: fit-content;

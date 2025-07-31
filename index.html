@@ -28,7 +28,6 @@
       src="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js"
     ></script>
 
-    <script src="script.css"></script>
   </head>
   <body>
     <header>
@@ -73,16 +72,12 @@
                   >Prévésions 5 Jour</a
                 >
               </li>
-              <li class="nav-item night-mood">
+               <li class="nav-item">
                 <a class="nav-link" href="#prévésions_5jour"
-                  ><i class="fa-solid fa-moon"></i
-                ></a>
+                  >Télécharger App</a
+                >
               </li>
-              <li class="nav-item white-mood">
-                <a class="nav-link" href="#prévésions_5jour"
-                  ><i class="fa-solid fa-sun"></i
-                ></a>
-              </li>
+             
             </ul>
           </div>
         </div>
@@ -100,7 +95,7 @@
  et bien plus encore, tout en écoutant 
  vos hits favoris.</p>
           <div class="hero-btn">
-            <button class="btn" style="background-color: yellow !important">
+            <button class="btn" style="background-color:rgb(222, 222, 142) !important">
               <i class="fa-regular fa-cloud"></i> <a href="#" style="text-decoration: none;color: #000;">Voir la Meteo</a>
             </button>
             <button class="btn" style="border: 3px solid #ffff; color: #fff">
@@ -118,28 +113,31 @@
          <div class="local-météo">
           <div class="local-météo-city">
             <div class="local-météo-city-infos">
-              <h3><i class="fa-solid fa-location-dot"></i> Casablanca</h3>
+              <h3>
+                <i class="fa-solid fa-location-dot"></i> 
+                <span id="city"></span>
+              </h3>
               <h2>
                 <i class="fa-regular fa-sun"></i
-                ><span style="font-size: 60px">24°</span>
+                ><span style="font-size: 60px" id="temp"></span>
               </h2>
             </div>
           </div>
           <div class="local-météo-infos">
             <div class="local-météo-infos-1">
               <h4>
-                Humidité: <span style="color: rgb(225, 225, 225)">65%</span>
+                Humidité: <span style="color: rgb(225, 225, 225)" id="humidité"></span>
               </h4>
               <h4>
-                Vent: <span style="color: rgb(225, 225, 225)"> 12 km/h</span>
+                Vent: <span style="color: rgb(225, 225, 225)" id="wind"></span>
               </h4>
             </div>
             <div class="local-météo-infos-2">
               <h4>
-                Humidité: <span style="color: rgb(225, 225, 225)">65%</span>
+                Pression: <span style="color: rgb(225, 225, 225)" id="pression"></span>
               </h4>
               <h4>
-                Vent: <span style="color: rgb(225, 225, 225)"> 12 km/h</span>
+                Vésiblité: <span style="color: rgb(225, 225, 225)" id="visibilité"></span>
               </h4>
             </div>
           </div>
@@ -157,10 +155,11 @@
       </h2>
       <div class="cart-météo">
         <div class="search-cart-input">
-          <form action="">
-            <input type="text" placeholder="Entrez un lieu" />
+          <div class="search">
+             <input type="text" placeholder="Entrez un lieu" />
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
+          </div>
+           
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d53724.89949225236!2d-7.625014307238956!3d33.58204574739945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sma!4v1753799696321!5m2!1sen!2sma"
             width="400"
@@ -177,22 +176,31 @@
               <div class="search-météo-city-infos">
                 <h3>
                   <i class="fa-solid fa-location-dot" style="color: red"></i>
-                  Casablanca
+                  <span style="font-size:40px;color: #000;" class="city"></span>
+                  
                 </h3>
                 <h2>
                   <i class="fa-regular fa-sun" style="color: red"></i>
-                  <span style="font-size: 60px">24°</span>
+                  <span style="font-size: 60px" class="temp"></span>
                 </h2>
               </div>
             </div>
             <div class="search-météo-infos">
               <div class="search-météo-infos-1">
-                <h4>Humidité: <span>65%</span></h4>
-                <h4>Vent: <span>12 km/h</span></h4>
+                 <h4>
+                Humidité: <span style="color: rgb(67, 66, 66);font-size: 15px;" class="humidité"></span>
+              </h4>
+                 <h4>
+                Vent: <span style="color:  rgb(67, 66, 66);font-size: 15px;" class="wind"></span>
+              </h4>
               </div>
               <div class="search-météo-infos-2">
-                <h4>Humidité: <span>65%</span></h4>
-                <h4>Vent: <span>12 km/h</span></h4>
+                <h4>
+                Pression: <span style="color: rgb(67, 66, 66);font-size: 15px;" class="pression"></span>
+              </h4>
+              <h4>
+                Vésiblité: <span style="color:  rgb(67, 66, 66);font-size: 15px;" class="visibilité"></span>
+              </h4>
               </div>
             </div>
           </div>
@@ -396,5 +404,8 @@
       </div>
    
     </footer>
+  
+    <script src="script.js"></script>
+  
   </body>
 </html>
