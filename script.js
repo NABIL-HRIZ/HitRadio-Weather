@@ -37,7 +37,17 @@ async function checkWeatherByCoords(lat, lon) {
   if (data.cod === 200) {
     localCartWeather(data);  
     localWeather(data);     
-  } else {
+
+
+    const forecastUrl = `${apiUrlForecast}?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiId}`;
+    const forecastResponse = await fetch(forecastUrl);
+    const forecastData = await forecastResponse.json();
+
+    updateWeatherCards(forecastData);
+    updateWeatherCardsjours(forecastData);
+  } 
+  
+  else {
     alert("Erreur lors de la récupération des données météo.");
   }
 }
@@ -200,7 +210,8 @@ if (navigator.geolocation) {
 function updateWeatherCardsjours(data) {
   const container = document.querySelector('.prevesions-5jours');
   container.innerHTML = '';
-
+ const cityNameElement = document.querySelector('.forecastJour-city-name');
+  cityNameElement.textContent = `${data.city.name}`;
   // Regrouper par jour
   const daysMap = {};
 
