@@ -1,5 +1,6 @@
 const apiId = "5fd696c98ddd227fcb99dc2e31d10bef";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+const apiUrlForecast = "https://api.openweathermap.org/data/2.5/forecast";
 
 const searchInput = document.querySelector('.search input');
 const searchBtn = document.querySelector('.search button');
@@ -48,12 +49,20 @@ async function checkWeather(city) {
 
   if (data.cod === 200) {
     localCartWeather(data);
+
+    // Ajoute cette ligne pour récupérer les prévisions avec forecast
+    const forecastUrl = `${apiUrlForecast}?q=${city}&units=metric&lang=fr&appid=${apiId}`;
+    const forecastResponse = await fetch(forecastUrl);
+    const forecastData = await forecastResponse.json();
+
+    updateWeatherCards(forecastData); // ici on utilise les données forecast
+    updateWeatherCardsjours(forecastData); // ajoute cette ligne ici
   } else {
     alert("Ville non trouvée !");
   }
 }
 
-// Initialisation automatique par géolocalisation
+
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -78,3 +87,158 @@ searchBtn.addEventListener('click', (e) => {
     alert("Entrez un nom de ville !");
   }
 });
+
+
+
+function getForecastByCoords(lat, lon) {
+  fetch(`${apiUrlForecast}?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiId}`)
+    .then(res => res.json())
+    .then(data => {
+      updateWeatherCards(data);
+    })
+    .catch(err => console.log(err));
+}
+
+
+
+function formatHour(dateTime) {
+  const hour = new Date(dateTime).getHours();
+  return `${hour.toString().padStart(2, '0')}:00`;
+}
+
+function updateWeatherCards(data) {
+  const container = document.querySelector('.prevesions'); 
+  container.innerHTML = ''; 
+
+  const cityNameElement = document.querySelector('.forecast-city-name');
+  cityNameElement.textContent = `${data.city.name}`;
+
+  const hourlyData = data.list.slice(0, 8);
+
+  hourlyData.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'cardContainer';
+
+    card.innerHTML = `
+      <div class="card">
+       <div class="weather-header">
+       <div class="weather-header-title">
+        <h4 class="hour">${formatHour(item.dt_txt)}</h4>
+       </div>
+       
+       <div class="weather-header-description">
+      <h3 class="weather ${getWeatherColorClass(item.weather[0].main)}">${item.weather[0].main}</h3>
+        <p class="weather-description">${item.weather[0].description}</p>
+       </div>
+       </div>
+       
+        <img class="weather-icon" src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png" alt="Icon">
+        <p class="temp">${Math.round(item.main.temp)}°C</p>
+        <div class="minmaxContainer">
+          <div class="min">
+            <p class="minHeading">Min</p>
+            <p class="minTemp">${Math.round(item.main.temp_min)}°C</p>
+          </div>
+          <div class="max">
+            <p class="maxHeading">Max</p>
+            <p class="maxTemp">${Math.round(item.main.temp_max)}°C</p>
+          </div>
+        </div>
+        <div class="weather-description-infos">
+          <h4>
+            <i class="fa-solid fa-wind"></i>
+            <span class="wind">${(item.wind.speed * 3.6).toFixed(2)} km/h</span>
+
+          </h4>
+          <h4>
+            <i class="fa-regular fa-eye"></i>
+            <span class="visibility">${(item.visibility / 1000).toFixed(1)} km</span>
+          </h4>
+          <h4>
+            <i class="fa-solid fa-down-long"></i>
+            <span class="humidity">${item.main.humidity}%</span>
+          </h4>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function getWeatherColorClass(condition) {
+  switch (condition.toLowerCase()) {
+    case 'clear':
+      return 'weather-clear';
+    case 'rain':
+      return 'weather-rain';
+    case 'clouds':
+      return 'weather-clouds';
+    case 'snow':
+      return 'weather-snow';
+    case 'thunderstorm':
+      return 'weather-thunder';
+    default:
+      return 'weather-default';
+  }
+}
+
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude } = position.coords;
+    getForecastByCoords(latitude, longitude);
+  }, () => {
+    alert("Autorise l'accès à la localisation pour voir la météo locale.");
+  });
+}
+
+
+//prevesion jours
+
+
+function updateWeatherCardsjours(data) {
+  const container = document.querySelector('.prevesions-5jours');
+  container.innerHTML = '';
+
+  // Regrouper par jour
+  const daysMap = {};
+
+  data.list.forEach(item => {
+    const date = item.dt_txt.split(' ')[0];
+    if (!daysMap[date]) {
+      daysMap[date] = [];
+    }
+    daysMap[date].push(item);
+  });
+
+  const allDays = Object.keys(daysMap).slice(0, 5); // les 5 premiers jours
+
+  allDays.forEach(date => {
+    const dayData = daysMap[date][0]; // On prend la 1ère entrée de chaque jour
+    const card = document.createElement('div');
+    card.className = 'daily-card';
+
+    const dayName = new Date(date).toLocaleDateString('fr-FR', { weekday: 'long' });
+
+    card.innerHTML = `
+      <h3>${dayName}</h3>
+      <img src="https://openweathermap.org/img/wn/${dayData.weather[0].icon}@2x.png" alt="icon">
+      <p>${dayData.weather[0].main} - ${dayData.weather[0].description}</p>
+      <p>Temp: ${Math.round(dayData.main.temp)}°C</p>
+      <p>Humidité: ${dayData.main.humidity}%</p>
+      <p>Vent: ${(dayData.wind.speed * 3.6).toFixed(1)} km/h</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude } = position.coords;
+    getForecastByCoords(latitude, longitude);
+  }, () => {
+    alert("Autorise l'accès à la localisation pour voir la météo locale.");
+  });
+}
