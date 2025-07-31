@@ -235,7 +235,8 @@ function updateWeatherCardsjours(data) {
     card.innerHTML = `
       <h3>${dayName}</h3>
       <img src="https://openweathermap.org/img/wn/${dayData.weather[0].icon}@2x.png" alt="icon">
-      <p>${dayData.weather[0].main} - ${dayData.weather[0].description}</p>
+      <h3 class="weather ${getWeatherColorClass(dayData.weather[0].main)}">${dayData.weather[0].main}</h3>
+      <p>${dayData.weather[0].description}</p>
       <p>Temp: ${Math.round(dayData.main.temp)}°C</p>
       <p>Humidité: ${dayData.main.humidity}%</p>
       <p>Vent: ${(dayData.wind.speed * 3.6).toFixed(1)} km/h</p>
