@@ -928,6 +928,18 @@ font-weight:300;
   color: yellow;
 }
 
+.footer-end{
+  width: 100%;
+  border-top: 2px solid #000;
+}
+.footer-end h3{
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #000;
+}
+
 @media (max-width: 768px) {
   .hero-infos {
     flex-direction: column;
@@ -1190,6 +1202,40 @@ font-weight:300;
 header .navbar-brand img{
   width:100px !important;
 }
+.footer-end h3{
+  font-size: 15px;
+}
+.chart-section {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .ourChart {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-chart,
+  .small-chart {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+  }
+
+  .chart-title i {
+    font-size: 1.2rem;
+  }
+
+  .chart-footer {
+    font-size: 0.8rem;
+    padding-top: 10px;
+  }
 }
 
 
