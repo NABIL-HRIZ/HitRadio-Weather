@@ -29,7 +29,7 @@
       src="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js"
     ></script>
 
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   </head>
   <body>
@@ -63,21 +63,26 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#météo">Météo</a>
+                <a class="nav-link" href="#search-card">Météo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#prévisions_horaires"
+                <a class="nav-link" href="#prevesion-horaire"
                   >Prévisions Horaires</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#prévésions_5jour"
+                <a class="nav-link" href="#prevesion-jours"
                   >Prévésions 5 Jour</a
                 >
               </li>
                <li class="nav-item">
-                <a class="nav-link" href="#prévésions_5jour"
+                <a class="nav-link" href="#telecharger-app"
                   >Télécharger App</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.radio-maroc.org/hit-radio-hyt-rdyw" target="_blank"
+                  >Site officiel</a
                 >
               </li>
              
@@ -87,7 +92,7 @@
       </nav>
     </header>
 
-    <section class="hero-section">
+    <section class="hero-section" id="acceil">
       <div class="hero-infos">
         <div class="hero-description">
           <h1>Hit Radio</h1>
@@ -99,10 +104,10 @@
  vos hits favoris.</p>
           <div class="hero-btn">
             <button class="btn" style="background-color:rgb(222, 222, 142) !important">
-              <i class="fa-regular fa-cloud"></i> <a href="#" style="text-decoration: none;color: #000;">Voir la Meteo</a>
+              <i class="fa-regular fa-cloud"></i> <a href="#search-card" style="text-decoration: none;color: #000;">Voir la Meteo</a>
             </button>
             <button class="btn" style="border: 3px solid #ffff; color: #fff">
-              <i class="fa-solid fa-music"></i> <a href="#" style="text-decoration: none;color: #fff;">Ecouter En Direct</a> 
+              <i class="fa-solid fa-music"></i> <a href="#officiel" style="text-decoration: none;color: #fff;">Ecouter En Direct</a> 
             </button>
           </div>
         </div>
@@ -150,7 +155,7 @@
       </div>
     </section>
 
-    <section class="search-cart">
+    <section class="search-cart" id="search-card">
       <h1>Trouvez la Météo sur la Carte</h1>
       <h2>
         Cliquez sur n'importe quelle ville du Maroc pour découvrir sa météo en
@@ -212,7 +217,7 @@
     </section>
 
 
-    <section class="prevesion-horaire">
+    <section class="prevesion-horaire" id="prevesion-horaire">
       <h1>Prévisions Horaires  / <small class="forecast-city-name" style="color: red;"></small> </h1>
       <h2>Consultez les prévisions météo détaillées heure par heure pour les prochaines 24 heures</h2>
 
@@ -222,7 +227,7 @@
       </div>
     </section>
 
-      <section class="prevesion-jours">
+      <section class="prevesion-jours" id="prevesion-jours">
       <h1>Prévisions 5 jours / <small class="forecastJour-city-name" style="color: red;"></small> </h1>
       <h2>Planifiez votre semaine avec nos prévisions météo détaillées jour par jour</h2>
 
@@ -230,6 +235,31 @@
        
 
       </div>
+    </section>
+
+    <section class="chart-section">
+        <h1>Évolution des Températures</h1>
+        
+        <div class="ourChart">
+            <div class="chart-container main-chart">
+                <div class="chart-title">
+                    <i>📈</i> Monthly Temperature Trends
+                </div>
+                <canvas id="myChart"></canvas>
+            </div>
+            
+            <div class="chart-container small-chart">
+                <div class="chart-title">
+                    <i>🌡️</i> Daily Temperature Overview
+
+                      </div>
+                <canvas id="dailyChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-footer">
+            Data Source: Open Weather App
+        </div>
     </section>
 
     <section class="ourExperiance">
@@ -266,7 +296,7 @@
       </div>
     </section>
 
-    <section class="officiel">
+    <section class="officiel" id="officiel">
       <div class="description">
         <h1>Toujours Votre Radio Préférée</h1>
         <p>
@@ -285,11 +315,11 @@
         <h2>En Direct Maintenant</h2>
         <h3>Morning Show avec Youssef & Sarah</h3>
 
-        <button><i class="fa-solid fa-headset"></i> Ecoutez maintenant</button>
+        <button><i class="fa-solid fa-headset"></i><a href="https://www.radio-maroc.org/hit-radio-hyt-rdyw" target="_blank">Ecoutez maintenant</a> </button>
       </div>
     </section>
 
-    <section class="telecharger-app">
+    <section class="telecharger-app" id="telecharger-app">
       <div class="app-infos">
         <h1>Téléchargez Notre Application</h1>
         <p>
@@ -350,11 +380,13 @@
   </ul>
   <div class="links">
     <ul class="links">
-      <li><a href="">Acceil</a></li>
-      <li><a href="">Méteo</a></li>
-      <li><a href="">Prévisions Horaires</a></li>
-      <li><a href="">Prévisions 5 jours</a></li>
-      <li><a href="">Télécharger App</a></li>
+      <li><a href="#acceil">Acceil</a></li>
+      <li><a href="#search-card">Méteo</a></li>
+      <li><a href="#prevesion-horaire">Prévisions Horaires</a></li>
+      <li><a href="#prevesion-jours">Prévisions 5 jours</a></li>
+      <li><a href="#telecharger-app">Télécharger App</a></li>
+      <li><a href="https://www.radio-maroc.org/hit-radio-hyt-rdyw" target="_blank">Site officiel</a></li>
+
 
 
     </ul>

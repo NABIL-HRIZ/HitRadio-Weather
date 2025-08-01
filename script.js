@@ -45,6 +45,10 @@ async function checkWeatherByCoords(lat, lon) {
 
     updateWeatherCards(forecastData);
     updateWeatherCardsjours(forecastData);
+    createTemperatureChart(forecastData);
+    createDailyTemperatureChart(forecastData)
+
+
   } 
   
   else {
@@ -67,6 +71,9 @@ async function checkWeather(city) {
 
     updateWeatherCards(forecastData); // ici on utilise les données forecast
     updateWeatherCardsjours(forecastData); // ajoute cette ligne ici
+    createTemperatureChart(forecastData);
+    createDailyTemperatureChart(forecastData)
+
   } else {
     alert("Ville non trouvée !");
   }
@@ -254,3 +261,117 @@ if (navigator.geolocation) {
     alert("Autorise l'accès à la localisation pour voir la météo locale.");
   });
 }
+
+
+//chart
+function createTemperatureChart(data) {
+  const hours = data.list.slice(0, 8).map(item => {
+    return new Date(item.dt_txt).getHours() + 'h';
+  });
+
+  const temperatures = data.list.slice(0, 8).map(item => {
+    return Math.round(item.main.temp);
+  });
+
+  const ctx = document.getElementById('myChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: hours,
+      datasets: [{
+        label: 'Température (°C)',
+        data: temperatures,
+        borderColor: 'rgba(236, 108, 69, 1)',
+        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: 'blue',
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+}
+
+
+function createDailyTemperatureChart(data) {
+  const daysMap = {};
+
+  data.list.forEach(item => {
+    const date = item.dt_txt.split(' ')[0];
+    if (!daysMap[date]) {
+      daysMap[date] = [];
+    }
+    daysMap[date].push(item.main.temp); //stocke les températures
+  });
+
+  const labels = [];
+  const dailyAvgTemps = [];
+
+  Object.keys(daysMap).slice(0, 5).forEach(date => {
+    const temps = daysMap[date];
+    const avgTemp =
+      temps.reduce((sum, t) => sum + t, 0) / temps.length;
+
+    const dayName = new Date(date).toLocaleDateString('fr-FR', {
+      weekday: 'long'
+    });
+
+    labels.push(dayName);
+    dailyAvgTemps.push(avgTemp.toFixed(1));
+  });
+
+  const ctx = document.getElementById('dailyChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Température moyenne (°C)',
+        data: dailyAvgTemps,
+        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointBackgroundColor: 'red'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
