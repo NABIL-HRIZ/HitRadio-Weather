@@ -64,13 +64,12 @@ async function checkWeather(city) {
   if (data.cod === 200) {
     localCartWeather(data);
 
-    // Ajoute cette ligne pour récupérer les prévisions avec forecast
     const forecastUrl = `${apiUrlForecast}?q=${city}&units=metric&lang=fr&appid=${apiId}`;
     const forecastResponse = await fetch(forecastUrl);
     const forecastData = await forecastResponse.json();
 
     updateWeatherCards(forecastData); // ici on utilise les données forecast
-    updateWeatherCardsjours(forecastData); // ajoute cette ligne ici
+    updateWeatherCardsjours(forecastData); 
     createTemperatureChart(forecastData);
     createDailyTemperatureChart(forecastData)
 
