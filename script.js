@@ -105,13 +105,17 @@ searchBtn.addEventListener('click', (e) => {
 
 
 
-function getForecastByCoords(lat, lon) {
-  fetch(`${apiUrlForecast}?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiId}`)
-    .then(res => res.json())
-    .then(data => {
-      updateWeatherCards(data);
-    })
-    .catch(err => console.log(err));
+async function getForecastByCoords(lat, lon) {
+  const myUrl=`${apiUrlForecast}?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiId}`
+  const response = await fetch(myUrl)
+  const data=await response.json()
+  
+  if(data.cod==200){
+    updateWeatherCards(data);
+  }
+ else {
+    alert("Erreur lors de la récupération des données météo.");
+  }
 }
 
 
