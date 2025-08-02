@@ -32,12 +32,11 @@ function localCartWeather(data) {
 async function checkWeatherByCoords(lat, lon) {
   const url = `${apiUrl}?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiId}`;
   const response = await fetch(url);
-  const data = await response.json();
-
+  const data = await response.json()
+  
   if (data.cod === 200) {
     localCartWeather(data);  
     localWeather(data);     
-
 
     const forecastUrl = `${apiUrlForecast}?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiId}`;
     const forecastResponse = await fetch(forecastUrl);
